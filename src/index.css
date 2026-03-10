@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=JetBrains+Mono&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Cinzel", serif;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-gold: #F2C94C;
+  --color-dark: #0A0A0A;
+  --color-paper: #F2F2F2;
+}
+
+@layer base {
+  body {
+    @apply bg-dark text-paper font-sans antialiased;
+  }
+}
+
+.glass {
+  @apply bg-white/5 backdrop-blur-md border border-white/10;
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, #F2C94C 0%, #D4AF37 100%);
+}
