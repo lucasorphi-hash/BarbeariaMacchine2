@@ -69,7 +69,7 @@ const LogoImage = () => {
 
   return (
     <img 
-      src="/logo.jpg" 
+      src="/logo.jpg?v=2" 
       alt="Barbearia Macchine Logo"
       className="w-full h-full object-contain rounded-xl drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]"
       onError={() => setError(true)}
@@ -312,7 +312,7 @@ export default function App() {
       <header className="relative py-12 px-4 flex flex-col items-center border-b border-white/5 bg-black overflow-hidden">
         {/* Header Background Image */}
         <img 
-          src="/logo.jpg"
+          src="/logo.jpg?v=2"
           alt="Header Background"
           className="absolute inset-0 w-full h-full object-cover opacity-30 scale-110 blur-[1px]"
           referrerPolicy="no-referrer"
