@@ -52,7 +52,7 @@ const TIMES = [
 const LogoImage = () => {
   return (
     <img 
-      src="/logo.jpg?v=8" 
+      src="/logo.jpg?v=9" 
       alt="Barbearia Macchine"
       className="w-full h-full object-contain rounded-xl drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]"
       referrerPolicy="no-referrer"
@@ -294,7 +294,7 @@ export default function App() {
       <header className="relative py-12 px-4 flex flex-col items-center border-b border-white/5 bg-black overflow-hidden">
         {/* Header Background Image */}
         <img 
-          src="/logo.jpg?v=8"
+          src="/logo.jpg?v=9"
           alt="Background"
           className="absolute inset-0 w-full h-full object-cover opacity-30 scale-110 blur-[1px]"
           referrerPolicy="no-referrer"
