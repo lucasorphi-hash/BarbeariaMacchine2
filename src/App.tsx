@@ -5,7 +5,6 @@ import {
   Clock, 
   User, 
   Phone, 
-  Scissors, 
   ChevronRight, 
   CheckCircle2,
   MapPin,
@@ -51,28 +50,11 @@ const TIMES = [
 // --- Components ---
 
 const LogoImage = () => {
-  const [error, setError] = useState(false);
-
-  if (error) {
-    return (
-      <div className="flex flex-col items-center justify-center p-4 text-center">
-        <div className="text-gold font-display text-4xl leading-none drop-shadow-lg">MACCHINE</div>
-        <div className="text-paper/60 font-sans text-xs tracking-[0.3em] mt-1 uppercase">Barbearia</div>
-        <div className="mt-6 opacity-20">
-          <Scissors size={64} className="text-gold" />
-        </div>
-        <div className="absolute top-2 right-2 w-4 h-4 border-t border-r border-gold/30" />
-        <div className="absolute bottom-2 left-2 w-4 h-4 border-b border-l border-gold/30" />
-      </div>
-    );
-  }
-
   return (
     <img 
-      src="/logo.jpg?v=2" 
-      alt="Barbearia Macchine Logo"
+      src="/logo-preview.jpg?v=7" 
+      alt="Barbearia Macchine"
       className="w-full h-full object-contain rounded-xl drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]"
-      onError={() => setError(true)}
       referrerPolicy="no-referrer"
     />
   );
@@ -312,8 +294,8 @@ export default function App() {
       <header className="relative py-12 px-4 flex flex-col items-center border-b border-white/5 bg-black overflow-hidden">
         {/* Header Background Image */}
         <img 
-          src="/logo.jpg?v=2"
-          alt="Header Background"
+          src="/logo-preview.jpg?v=7"
+          alt="Background"
           className="absolute inset-0 w-full h-full object-cover opacity-30 scale-110 blur-[1px]"
           referrerPolicy="no-referrer"
         />
@@ -324,7 +306,8 @@ export default function App() {
           <motion.div 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="relative w-64 h-64 mb-4"
+            className="relative w-64 h-64 mb-4 cursor-pointer active:scale-95 transition-transform"
+            onClick={resetForm}
           >
             <div className="w-full h-full rounded-2xl border-2 border-gold flex items-center justify-center p-2 bg-black/40 backdrop-blur-md overflow-hidden shadow-2xl shadow-gold/20 relative">
               <div className="relative z-10 w-full h-full flex items-center justify-center">
