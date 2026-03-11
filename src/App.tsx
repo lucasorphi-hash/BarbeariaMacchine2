@@ -51,7 +51,7 @@ const TIMES = [
 
 const LogoImage = ({ className = "" }: { className?: string }) => {
   return (
-   <img
+<img
   src="/logo.jpg"
   alt="Barbearia Macchine"
   style={{
