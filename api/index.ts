@@ -4,6 +4,7 @@ import { createClient } from "@libsql/client";
 import path from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
+import fs from "fs";
 
 dotenv.config();
 
@@ -82,7 +83,17 @@ async function startServer() {
 
   // Rota explícita para a logo para evitar erros de cache/static
   app.get("/logo.jpg", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "public", "logo.jpg"));
+    const publicPath = path.join(__dirname, "..", "public", "logo.jpg");
+    const distPath = path.join(__dirname, "..", "dist", "logo.jpg");
+    
+    if (fs.existsSync(publicPath)) {
+      res.sendFile(publicPath);
+    } else if (fs.existsSync(distPath)) {
+      res.sendFile(distPath);
+    } else {
+      console.error("Logo not found at:", { publicPath, distPath });
+      res.status(404).send("Logo not found");
+    }
   });
 
   app.post("/api/appointments", async (req, res) => {
