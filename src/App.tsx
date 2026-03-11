@@ -50,22 +50,11 @@ const TIMES = [
 // --- Components ---
 
 const LogoImage = ({ className = "" }: { className?: string }) => {
-  const [error, setError] = React.useState(false);
-  
-  if (error) {
-    return (
-      <div className={`flex items-center justify-center bg-zinc-900 border border-zinc-800 rounded-xl ${className}`}>
-        <span className="text-[#D4AF37] font-serif italic text-sm">Macchine</span>
-      </div>
-    );
-  }
-
   return (
     <img 
       src="/logo.jpg" 
       alt="Barbearia Macchine"
       className={`object-contain ${className}`}
-      onError={() => setError(true)}
       referrerPolicy="no-referrer"
     />
   );
