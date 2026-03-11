@@ -54,7 +54,10 @@ const LogoImage = ({ className = "" }: { className?: string }) => {
    <img
   src="/logo.jpg"
   alt="Barbearia Macchine"
-  style={{ height: "120px", objectFit: "contain" }}
+  style={{
+    height: "120px",
+    objectFit: "contain"
+  }}
 />
   );
 };
