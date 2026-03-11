@@ -51,14 +51,11 @@ const TIMES = [
 
 const LogoImage = ({ className = "" }: { className?: string }) => {
   return (
-   <img
-  src="/logo.jpg"
-  alt="Barbearia Macchine"
-  style={{
-    height: "120px",
-    objectFit: "contain"
-  }}
-/>
+    <img 
+      src="/logo.jpg?v=final_fix" 
+      alt="Logo Barbearia"
+      className={`object-contain ${className}`}
+    />
   );
 };
 
@@ -296,10 +293,9 @@ export default function App() {
       <header className="relative py-12 px-4 flex flex-col items-center border-b border-white/5 bg-black overflow-hidden">
         {/* Header Background Image */}
         <img 
-          src="/logo.jpg"
+          src="/logo.jpg?v=final_fix"
           alt="Background"
           className="absolute inset-0 w-full h-full object-cover opacity-30 scale-110 blur-[1px]"
-          referrerPolicy="no-referrer"
         />
         {/* Gradient Overlay for the header */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black" />
@@ -308,23 +304,37 @@ export default function App() {
           <motion.div 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="relative w-64 h-64 mb-4 cursor-pointer active:scale-95 transition-transform"
+            className="relative w-48 h-48 md:w-64 md:h-64 mb-6 cursor-pointer active:scale-95 transition-transform"
             onClick={resetForm}
           >
-            <div className="w-full h-full rounded-2xl border-2 border-gold flex items-center justify-center p-2 bg-black/40 backdrop-blur-md overflow-hidden shadow-2xl shadow-gold/20 relative">
+            <div className="w-full h-full rounded-full border-4 border-gold flex items-center justify-center p-4 bg-black/60 backdrop-blur-md overflow-hidden shadow-2xl shadow-gold/30 relative group">
+              <div className="absolute inset-0 bg-gold/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative z-10 w-full h-full flex items-center justify-center">
-                <LogoImage />
+                <LogoImage className="w-full h-full" />
               </div>
             </div>
           </motion.div>
-          <motion.h1 
+          
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.1 }}
+            className="text-center mb-4"
+          >
+            <h1 className="font-display text-5xl md:text-7xl text-gold tracking-tighter uppercase drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]">
+              Barbearia Macchine
+            </h1>
+            <div className="h-1 w-24 bg-gold mx-auto mt-2 rounded-full" />
+          </motion.div>
+
+          <motion.h2 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl font-display text-gold tracking-widest uppercase drop-shadow-md"
+            transition={{ delay: 0.3 }}
+            className="text-lg md:text-xl font-sans text-white/70 tracking-[0.3em] uppercase drop-shadow-md font-light"
           >
             Agendamento Online
-          </motion.h1>
+          </motion.h2>
         </div>
       </header>
 
