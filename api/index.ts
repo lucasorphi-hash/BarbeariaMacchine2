@@ -81,21 +81,6 @@ async function startServer() {
     }
   });
 
-  // Rota explícita para a logo para evitar erros de cache/static
-  app.get("/logo.jpg", (req, res) => {
-    const publicPath = path.join(__dirname, "..", "public", "logo.jpg");
-    const distPath = path.join(__dirname, "..", "dist", "logo.jpg");
-    
-    if (fs.existsSync(publicPath)) {
-      res.sendFile(publicPath);
-    } else if (fs.existsSync(distPath)) {
-      res.sendFile(distPath);
-    } else {
-      console.error("Logo not found at:", { publicPath, distPath });
-      res.status(404).send("Logo not found");
-    }
-  });
-
   app.post("/api/appointments", async (req, res) => {
     const { customer_name, customer_phone, service, date, time, extra_time } = req.body;
     
@@ -154,6 +139,9 @@ async function startServer() {
       res.status(500).json({ error: error.message });
     }
   });
+
+  // Static files from public folder
+  app.use(express.static(path.join(__dirname, "..", "public")));
 
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
