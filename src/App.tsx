@@ -51,12 +51,11 @@ const TIMES = [
 
 const LogoImage = ({ className = "" }: { className?: string }) => {
   return (
-    <img 
-      src="/logo.jpg" 
-      alt="Barbearia Macchine"
-      className={`object-contain ${className}`}
-      referrerPolicy="no-referrer"
-    />
+   <img
+  src="/logo.jpg"
+  alt="Barbearia Macchine"
+  style={{ height: "120px", objectFit: "contain" }}
+/>
   );
 };
 
