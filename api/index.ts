@@ -80,6 +80,11 @@ async function startServer() {
     }
   });
 
+  // Rota explícita para a logo para evitar erros de cache/static
+  app.get("/logo.jpg", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "public", "logo.jpg"));
+  });
+
   app.post("/api/appointments", async (req, res) => {
     const { customer_name, customer_phone, service, date, time, extra_time } = req.body;
     
