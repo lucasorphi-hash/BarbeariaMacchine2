@@ -7,7 +7,9 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
 
   return {
-    base: "/", // ⭐⭐⭐ ADICIONE ESTA LINHA
+    base: "/",
+    publicDir: "public", // ⭐ FORÇA COPIAR PUBLIC
+    root: ".",           // ⭐ DEFINE RAIZ CORRETA
 
     plugins: [react(), tailwindcss()],
 
