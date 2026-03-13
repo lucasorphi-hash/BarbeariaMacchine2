@@ -59,6 +59,11 @@ const LogoImage = ({ className = "" }: { className?: string }) => {
   );
 };
 
+const timeToMinutes = (t: string) => {
+  const [h, m] = t.split(':').map(Number);
+  return h * 60 + m;
+};
+
 export default function App() {
   const [step, setStep] = useState(1);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
@@ -211,11 +216,18 @@ export default function App() {
       
       if (checkResponse.ok && Array.isArray(latestAppointments)) {
         const isCombo = selectedService.duration === '1h';
+        const index = TIMES.indexOf(selectedTime);
+        const nextTime = TIMES[index + 1];
+        
         const timesToCheck = [selectedTime];
         if (isCombo) {
-          const index = TIMES.indexOf(selectedTime);
-          const nextTime = TIMES[index + 1];
-          if (nextTime) timesToCheck.push(nextTime);
+          // Check if there's a next slot and if it's exactly 30 mins away
+          if (!nextTime || (timeToMinutes(nextTime) - timeToMinutes(selectedTime) !== 30)) {
+            setError('Não há tempo suficiente para realizar o combo neste horário.');
+            setIsSubmitting(false);
+            return;
+          }
+          timesToCheck.push(nextTime);
         }
 
         const alreadyBooked = latestAppointments.some((apt: any) => 
@@ -223,7 +235,7 @@ export default function App() {
         );
 
         if (alreadyBooked) {
-          setError('Desculpe, este horário acabou de ser reservado por outra pessoa. Por favor, escolha outro.');
+          setError('Desculpe, este horário (ou parte dele) acabou de ser reservado. Por favor, escolha outro.');
           setAppointments(latestAppointments);
           setStep(3);
           setIsSubmitting(false);
@@ -428,10 +440,17 @@ export default function App() {
                   let isNextBooked = false;
                   
                   // If it's a 1h service (Combo), we need to check if the NEXT slot is also free
+                  // and if it's exactly 30 minutes after the current slot (no gaps like lunch break)
                   if (selectedService?.duration === '1h') {
                     const nextTime = TIMES[index + 1];
-                    // If there's no next slot (end of day) or the next slot is booked
-                    isNextBooked = !nextTime || bookedTimes.includes(nextTime);
+                    if (!nextTime) {
+                      isNextBooked = true; // No slot after this one
+                    } else {
+                      const currentMin = timeToMinutes(time);
+                      const nextMin = timeToMinutes(nextTime);
+                      const isGap = nextMin - currentMin !== 30;
+                      isNextBooked = isGap || bookedTimes.includes(nextTime);
+                    }
                   }
 
                   const isDisabled = isBooked || isNextBooked;
